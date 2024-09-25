@@ -1,0 +1,16 @@
+if ($foto == null) {
+		$sql = mysqli_query($koneksi, 'UPDATE foto SET judulfoto='$judulfoto', deskripsifoto='$deskripsifoto', tanggalunggah='$tanggalunggah', albumid='$albumid' WHERE fotoid="$fotoid'");
+	}else{
+     $query = mysqli_query($koneksi, "SELECT * FROM foto WHERE fotoid='$fotoid'");
+     $data = mysqli_fetch_array($query);
+     if (is_file('../assets/img/'.$data['lokasifile'])) {
+     	unlink('../assets/img/'.$data['lokasifile'])
+     }
+      move_uploaded_file($tmp, $lokasi.$namafoto);
+      $sql = mysqli_query($koneksi, 'UPDATE foto SET judulfoto='$judulfoto', deskripsifoto='$deskripsifoto', tanggalunggah='$tanggalunggah', lokasifile='$lokasifile', albumid='$albumid' WHERE fotoid="$fotoid'");
+	 }
+	 echo "<script>
+	alert('Data berhasil diperbarui!');
+	location.href='../admin/foto.php';
+	</script>";
+	
